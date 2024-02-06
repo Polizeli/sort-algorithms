@@ -1,20 +1,31 @@
-ltbs = [11, 6, 3, 24, 46, 22, 7]
-
-def merge(ltbs:list):
+def merge(ltbs):
     if len(ltbs) > 1:
-        mid = int(len(ltbs)/2) + 1
+        mid = len(ltbs)//2
         left = ltbs[:mid]
         rigth = ltbs[mid:]
-        print(left)
-        print(rigth)
+
         merge(left)
         merge(rigth)
 
+        i = j = k = 0
 
-
-
-
-
-
-
-merge(ltbs)
+        while i < len(left) and j < len(rigth):
+            if left[i] <= rigth[j]:
+                ltbs[k] = left[i]
+                i+=1
+            else:
+                ltbs[k] = rigth[j]
+                j+=1
+            k +=1
+        
+        while i < len(left):
+            ltbs[k] = left[i]
+            i += 1
+            k += j
+        
+        while j < len(rigth):
+            ltbs[k] = rigth[j]
+            j += 1
+            k += 1
+    
+    return ltbs
